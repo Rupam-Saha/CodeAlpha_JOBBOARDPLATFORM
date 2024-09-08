@@ -1,0 +1,13 @@
+const express=require("express");
+const r=express.Router();
+const {addjob,joblist,searchjob,searchjobbycompanyname,profileupload,apply}=require("../controller/controll");
+const check=require("../middleware/job-middleware");
+const check1=require("../middleware/resume-middleware");
+const check2=require("../middleware/apply-middleware");
+r.route("/joblisting").post(check(),addjob);
+r.route("/AlljobData").get(joblist);
+r.route("/searchjob/:Job_id").get(searchjob);
+r.route("/searchjobbyname/:Company").get(searchjobbycompanyname);
+r.route("/uploadProfile").post(check1(),profileupload);
+r.route("/apply/:Job_id").post(check2(),apply);
+module.exports=r;
